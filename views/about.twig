@@ -1,0 +1,38 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+<main role="main">
+    <div class="jumbotron">
+        <div class="container" align="center">
+            <h1 class="display-6">About COVID-19 Tracker!</h1>
+            <p>This is a website where you can see all the details about coronavirus like Confirmed Cases, Deaths, Recovered, Active, and Vaccinated for all the Countries, Indian States and Districts. You can also explore the COWIN vaccine centers in your area by using Pin Code and also can Download Certificate by using beneficiary id.</p>
+            <p><a class="btn btn-primary btn-lg" href="/" role="button">Go to Home &raquo;</a></p>
+        </div>
+        </div>
+        <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+            <h4>Global Country Wise</h4>
+            <p>You can Explore World Global data and all World's Countries situation related to coronavirus using graph or charts. </p>
+            <p>You can see Confirmed Cases, Deaths, Recovered, and Active cases for all the Countries.</p>
+            <p><a class="btn btn-success" href="/allworld" role="button">Global &raquo;</a>&nbsp;&nbsp;<a class="btn btn-danger" href="/countrywise" role="button">Country Wise &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+            <h4>Indian Data</h4>
+            <p>You can Explore all about indian situation related to coronavirus for all the states with districts data using graph or charts. </p>
+            <p>You can see Confirmed Cases, Deaths, Recovered, Active, and Vaccinated for all the States and Districts. </p>
+            <p><a class="btn btn-success" href="/" role="button">Indian &raquo;</a>&nbsp;&nbsp;<a class="btn btn-danger" href="/indiastatewise" role="button">States and Districts &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+            <h4>COWIN Vaccine and Helpline</h4>
+            <p>You can Find COWIN vaccine center in your area by using pin code and download vaccine certificate.</p>
+            <p>You can see helpline social media handles for India and all the helpline numbers for indian states.</p>
+            <p><a class="btn btn-success" href="/cowin" role="button">COWIN &raquo;</a>&nbsp;&nbsp;<a class="btn btn-danger" href="/helpline" role="button">Helpline &raquo;</a></p>
+            </div>
+        </div>
+        <hr>
+    </div>
+</main>
+
+{% endblock %}

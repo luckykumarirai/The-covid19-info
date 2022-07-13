@@ -1,0 +1,28 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<center>
+<br><br>
+  <h2>{{id}} district wise data</h2><br>
+  <div class="container">
+  {% for key,items in statedistrict %}
+    {% if key == id %}
+      {% for key,item in items.districts %}
+        <div style="display:inline-block;">
+          <div class="card border-dark mb-3" style="width: 20rem;height: 20rem;margin:1rem;">
+            <div class="card-header bg-dark text-white">{{ key }}</div>
+            <div class="card-body">
+              <h5 class="card-title text-primary">Confirmed: {{ item.total.confirmed }}</h5>
+              <h5 class="card-title text-danger">Deaths: {{ item.total.deceased }}</h5>
+              <h5 class="card-title text-success">Recovered: {{ item.total.recovered }}</h5>
+              <h5 class="card-title text-warning">Active: {{ item.total.confirmed-item.total.deceased-item.total.recovered }}</h5>
+            </div>
+            <div class="card-footer bg-info border-success text-white"><b>Vaccinated Dose1: {{item.total.vaccinated1}}</b><br><b>Vaccinated Dose2: {{item.total.vaccinated2}}</b></div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  </div>
+</center>
+{% endblock %}

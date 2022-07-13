@@ -1,0 +1,29 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<center>
+<br><br>
+    <h2>Indian helpline</h2><br>
+    <div class="container">
+        <a type="button" class="btn btn-outline-success" style="margin:1rem;" href="tel:{{indiahelpline.primary.number}}"><i class='fa fa-phone-square'> {{indiahelpline.primary.number}}</i></a>
+        <a type="button" class="btn btn-outline-danger" style="margin:1rem;" href="mailto:{{indiahelpline.primary.email}}"><i class='fa fa-envelope'> {{indiahelpline.primary.email}}</i></a>
+        <a type="button" class="btn btn-outline-primary" style="margin:1rem;" href="{{indiahelpline.primary.facebook}}"><i class='fa fa-facebook-square'> Facebook</i></a>
+        <a type="button" class="btn btn-outline-info" style="margin:1rem;" href="{{indiahelpline.primary.twitter}}"><i class='fa fa-twitter-square'> Twitter</i></a>
+        <a type="button" class="btn btn-outline-warning" style="margin:1rem;" href="{{indiahelpline.primary.media}}"><i class='fa fa-globe'> Media</i></a>
+    </div>
+    <br>
+    <h2>Indian state wise helpline number</h2><br>
+    <div class="container">
+        {% for item in indiahelpline.regional %}
+        <div style="display:inline-block;">
+            <div class="card border-dark mb-3" style="width: 15rem;margin:1rem;">
+            <div class="card-header bg-dark text-white">{{ item.loc }}</div>
+            <div class="card-body">
+                <a class="card-title text-primary" href="tel:{{item.number}}">{{ item.number }}</a>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</center>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<center>
+<br><br>
+  <div class="container">
+  <div class="row">
+        <div class="col-sm-5" style="border:1px solid black;border-radius:5px;padding:1%;">
+            <h4>Find COWIN Centers</h4><hr style="border-top: 4px dashed #bbb;border-radius: 5px;">
+            <form action="/cowinpin" method="POST">
+                <div class="form-group row">
+                    <label for="staticPin" class="col-sm-3 col-form-label">Pin Code:</label>
+                    <div class="col-sm-9">
+                    <input type="number" name="pincode" class="form-control" id="staticPin" placeholder="Enter Pin Code" maxlength="6" minlength="6">
+                    </div>
+                </div>
+                <button type="submit" style="width:100%;" class="btn btn-outline-info">Find Centers</button>
+            </form>
+        </div>
+        <div class="col-sm-2 align-self-center">
+            <h4>OR</h4>
+        </div>
+        <div class="col-sm-5 ml-auto" style="border:1px solid black;border-radius:5px;padding:1%;">
+            <h4>Download Vaccination Certificate</h4><hr style="border-top: 4px dashed #bbb;border-radius: 5px;">
+            <form action="/cowincertificate" method="POST">
+                <div class="form-group row">
+                    <label for="staticState" class="col-sm-4 col-form-label">Beneficiary ID:</label>
+                    <div class="col-sm-8">
+                    <input type="number" class="form-control" name="id" id="staticState" placeholder="Enter beneficiary id">
+                    </div>
+                </div>
+                <button type="submit" style="width:100%;" class="btn btn-outline-success">Check Certificate</button>
+            </form>
+        </div>
+    </div>
+  </div>
+  <br><br>
+  <div class="container">
+    {% if certificatelink!="" %}
+        <br>
+        <a type="button" style="width:100%;" class="btn btn-danger" href="{{ certificatelink }}">Download Certificate Now</a>
+        <br>
+    {% endif %}
+    <div class="mypanel"></div>
+  </div>
+<script>
+window.onload = function() {
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0');
+var yyyy = today.getFullYear();
+today = dd + '-' + mm + '-' + yyyy;
+$.getJSON('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode='+{{pin}}+'&date='+today, function(data) {
+    var text=""
+    data.sessions.forEach(item => {
+        text+="<div style='display:inline-block;'><div class='card border-dark mb-3' style='width: 17rem;margin:1rem;'><div class='card-header bg-dark text-white'>"+item.name+"<br><p class='text-warning'><i>Address: "+item.address+", "+item.block_name+", "+item.district_name+" - "+item.pincode+"</i></p></div><div class='card-body'><h5 class='card-title text-primary'>Time: "+item.from+" - "+item.to+"</h5><h5 class='card-title text-danger'>Available Total Doses: "+item.available_capacity+"</h5><h5 class='card-title text-success'>Available Dose1: "+item.available_capacity_dose1+"</h5><h5 class='card-title text-warning'>Available Dose2: "+item.available_capacity_dose2+"</h5><h5 class='card-title text-warning'>Type: "+item.fee_type+" - "+item.fee+" rupees</h5></div><div class='card-footer bg-info border-success text-white'><b>Vaccine: "+item.vaccine+"</b><br><b>Age: "+item.min_age_limit+"+</b></div></div></div>";
+    });
+    $(".mypanel").html(text);
+});
+}
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+{% endblock %}
